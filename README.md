@@ -91,4 +91,4 @@ In `src/config/spreadhseet.ts` you can change the spreadsheet configuration:
 
 - [ ] `/summary` command to show expense summary of current week/month/year
 - [ ] Expense charts and projections
-- [ ] Automatically pick category based on expense description
+- [ ] Automatically pick category based on expense description (if quick expense)
