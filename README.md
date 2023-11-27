@@ -65,7 +65,7 @@ To make the code reachable from the web we need to create an app deployment.
 - Make sure to put `Everyone` in the access tab.
 - Click _Deploy_
 
-Now the app can handle external request using the associated url `https://script.google.com/macros/s/<deployId>/exec`
+Now the app can handle external requests via the associated url `https://script.google.com/macros/s/<deployId>/exec`
 
 ### 🎣 Setup Telegram Bot webhook
 
