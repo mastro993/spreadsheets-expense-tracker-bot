@@ -62,7 +62,7 @@ To make the code reachable from the web we need to create an app deployment.
 
 - From the App Script dashboard click **Deploy > New deployment**.
 - Select Web Application
-- Make sure to put `Everyone`` in the access.
+- Make sure to put `Everyone` in the access tab.
 - Click _Deploy_
 
 Now under **Deploy > Manage deployment** you can see the deployment ID.
