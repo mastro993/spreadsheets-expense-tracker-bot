@@ -65,6 +65,13 @@ To make the code reachable from the web we need to create an app deployment.
 - Make sure to put `Everyone` in the access tab.
 - Click _Deploy_
 
+Now the app can handle external request using the associated url `https://script.google.com/macros/s/<deployId>/exec`
+
+### 🎣 Setup Telegram Bot webhook
+
+From the App Script project page you can link the Telegram Bot just by calling `setTelegramWebook`.
+Or you can simply call `https://api.telegram.org/bot<telegramToken>/setWebhook?url=<webAppUrl>` from any REST client like Postman. 
+
 Now under **Deploy > Manage deployment** you can see the deployment ID.
 If you want to deploy a new version directly from the `clasp` cli, put that ID in your `package.json` file under `appscript_deploy_id`.
 
@@ -73,6 +80,8 @@ In this way you can build and deploy a new version with
 ```bash
 yarn release
 ```
+
+### 
 
 ### Configuration
 
