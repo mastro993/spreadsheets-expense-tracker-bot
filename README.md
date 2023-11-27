@@ -6,7 +6,7 @@ Telegram bot to track expenses on a Google Spreadsheet
 
 Prerequisites:
 
-- A telegram bot. You can create one using [@BotFather](https://t.me/botfather) on Telegram. Just follow [these instructions](https://core.telegram.org/bots/tutorial) to create one. Remember to write down the bot token that it will give to you.
+- A telegram bot. You can create one using [@BotFather](https://t.me/botfather) on Telegram, just follow [these instructions](https://core.telegram.org/bots/tutorial). Remember to write down the bot token that it will give to you.
 - A Google Spreadsheet document where to insert the expenses. You can create a new one or use an existing one, just make sure to have a Sheet where the bot can put the data.
 - `clasp` cli, we'll use it to push the code to the Google Spreadsheet and manage deployments. Of course you can do it manually... but it's not cool :P
 
@@ -54,7 +54,7 @@ At this point, if you have configured clasp, you can push the code to the projec
 yarn push
 ```
 
-Alternatively you just can copy and paste it the App Script root folder.
+Alternatively you can just copy and paste it the App Script root folder.
 
 ### 🌐 Deploy
 
