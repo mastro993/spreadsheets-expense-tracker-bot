@@ -2,6 +2,8 @@
 
 Telegram bot to track expenses on a Google Spreadsheet
 
+<img src="https://github.com/mastro993/spreadsheets-expense-tracker-bot/assets/6160324/0ac4e156-7f9a-40b1-a8aa-628a50a8337c" width="200" />
+
 ## ⚡️ How to use it
 
 Prerequisites:
@@ -98,6 +100,7 @@ In `src/config/spreadhseet.ts` you can change the spreadsheet configuration:
 
 ## TODO
 
+– [ ] Find a better name
 - [ ] `/summary` command to show expense summary of current week/month/year
 - [ ] Expense charts and projections
 - [ ] Automatically pick category based on expense description (if quick expense)
