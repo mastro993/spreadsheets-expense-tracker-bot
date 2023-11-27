@@ -69,8 +69,8 @@ Now the app can handle external requests via the associated url `https://script.
 
 ### 🎣 Setup Telegram Bot webhook
 
-From the App Script project page you can link the Telegram Bot just by calling `setTelegramWebook`.
-Or you can simply call `https://api.telegram.org/bot<telegramToken>/setWebhook?url=<webAppUrl>` from any REST client like Postman. 
+From the App Script project page you can link the Telegram Bot just by invoking `setTelegramWebook`.
+Alternatively, you can call `https://api.telegram.org/bot<telegramToken>/setWebhook?url=<webAppUrl>` from any browser or REST client, like Postman. 
 
 Now under **Deploy > Manage deployment** you can see the deployment ID.
 If you want to deploy a new version directly from the `clasp` cli, put that ID in your `package.json` file under `appscript_deploy_id`.
