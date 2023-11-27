@@ -60,10 +60,10 @@ Alternatively you can just copy and paste it the App Script root folder.
 
 To make the code reachable from the web we need to create an app deployment.
 
-- From the App Script dashboard click **Deploy > New deployment**.
+- From the App Script dashboard click **Deploy > New deployment**
 - Select Web Application
 - Make sure to put `Everyone` in the access tab.
-- Click _Deploy_
+- Click **Deploy**
 
 Now the app can handle external requests via the associated url `https://script.google.com/macros/s/<deployId>/exec`
 
