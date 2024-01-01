@@ -3,10 +3,9 @@ import { getExpensesSheet } from "./sheet";
 
 enum ExpenseColumn {
   DATE = 0,
-  CATEGORY = 1,
-  AMOUNT = 2,
-  DESCRIPTION = 3,
-  ACCOUNT = 4,
+  CATEGORY = 2,
+  AMOUNT = 3,
+  DESCRIPTION = 4,
   NOTES = 5,
 }
 
@@ -19,12 +18,11 @@ export type Expense = {
   category?: string;
   subcategory?: string;
   description?: string;
-  account?: string;
   notes?: string;
 };
 
 const rowToExpense = (data: string[]): Expense => {
-  const [date, fullCategory, amount, description, account, notes] = data;
+  const [date, _type, fullCategory, amount, description, notes] = data;
   const [category, subcategory] = fullCategory.split("-").map((_) => _.trim());
 
   return {
@@ -34,7 +32,6 @@ const rowToExpense = (data: string[]): Expense => {
     subcategory,
     amount: parseFloat(amount),
     description,
-    account,
     notes,
   };
 };
@@ -47,10 +44,10 @@ const expenseToRow = (expense: Expense): any[] => {
 
   return [
     Utilities.formatDate(expense.date, TIMEZONE, "dd/MM/yyyy"),
+    "Expense",
     fullCategory,
     expense.amount,
     expense.description,
-    expense.account,
     expense.notes,
   ];
 };
