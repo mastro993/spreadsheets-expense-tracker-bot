@@ -79,8 +79,9 @@ export const handleCallback = (callbackQuery: Telegram.CallbackQuery) => {
 
   switch (callback) {
     case Callback.DELETE:
-      var expenseIndex = parseInt(payload, 10);
-      handleDeleteExpense(chat_id, expenseIndex);
+      var expenseYear = parseInt(payload.split("_")[0], 10);
+      var expenseIndex = parseInt(payload.split("_")[1], 10);
+      handleDeleteExpense(chat_id, expenseYear, expenseIndex);
       break;
 
     case Callback.DATE:
@@ -109,8 +110,8 @@ export const handleCallback = (callbackQuery: Telegram.CallbackQuery) => {
   }
 };
 
-const handleDeleteExpense = (chat_id: string, index: number) => {
-  const expense = getExpense(index);
+const handleDeleteExpense = (chat_id: string, year: number, index: number) => {
+  const expense = getExpense(year, index);
   deleteExpense(expense);
 
   const { category, amount, description } = expense;

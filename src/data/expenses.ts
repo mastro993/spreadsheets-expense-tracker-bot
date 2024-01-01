@@ -52,15 +52,24 @@ const expenseToRow = (expense: Expense): any[] => {
   ];
 };
 
-export const getExpense = (index: number): Expense | undefined => {
-  const expensesSheet = getExpensesSheet();
+export const getExpense = (
+  year: number,
+  index: number
+): Expense | undefined => {
+  const expensesSheet = getExpensesSheet(year);
+  if (!expensesSheet) {
+    return undefined;
+  }
   const dataRange = expensesSheet.getRange(index + 1, 1, 1, COLUMN_SIZE);
   const values = dataRange.getValues();
   return values[0] && { ...rowToExpense(values[0]), index };
 };
 
-export const getAllExpenses = (): Expense[] => {
-  const expensesSheet = getExpensesSheet();
+const getAllExpensesForYear = (year: number): Expense[] => {
+  const expensesSheet = getExpensesSheet(year, false);
+  if (!expensesSheet) {
+    return [];
+  }
   const numRows = expensesSheet.getLastRow() - 1;
   const dataRange = expensesSheet.getRange(2, 1, numRows, COLUMN_SIZE);
   const data = dataRange.getValues();
@@ -70,8 +79,25 @@ export const getAllExpenses = (): Expense[] => {
   }));
 };
 
-export const getLastExpenses = (size: number = 5): Expense[] => {
-  const expensesSheet = getExpensesSheet();
+export const getAllExpenses = (): Expense[] => {
+  let year = new Date().getFullYear();
+  let expenses: Expense[] = [];
+  let yearExpenses: Expense[] = [];
+  do {
+    yearExpenses = getAllExpensesForYear(year);
+    expenses = expenses.concat(yearExpenses);
+  } while (yearExpenses.length > 0);
+  return expenses;
+};
+
+export const getLastExpensesForYear = (
+  size: number = 5,
+  year: number
+): Expense[] => {
+  const expensesSheet = getExpensesSheet(year);
+  if (!expensesSheet) {
+    return [];
+  }
   const numRows = expensesSheet.getLastRow() - 1;
   const fromRow = Math.max(numRows - (size - 1), 0);
   const dataRange = expensesSheet.getRange(fromRow + 1, 1, size, COLUMN_SIZE);
@@ -82,17 +108,33 @@ export const getLastExpenses = (size: number = 5): Expense[] => {
   }));
 };
 
+export const getLastExpenses = (size: number = 5): Expense[] => {
+  const currentYear = new Date().getFullYear();
+  const currentYearExpenses = getLastExpensesForYear(size, currentYear);
+  const currentYearExpensesSize = currentYearExpenses.length;
+  if (currentYearExpensesSize < size) {
+    return currentYearExpenses.concat(
+      getLastExpensesForYear(size - currentYearExpensesSize, currentYear - 1)
+    );
+  }
+
+  return currentYearExpenses;
+};
+
 export const saveExpense = (expense: Expense): number => {
-  const expensesSheet = getExpensesSheet();
+  const expensesSheet = getExpensesSheet(expense.date.getFullYear(), true);
+  if (!expensesSheet) {
+    return -1;
+  }
   const sheet = expensesSheet.appendRow(expenseToRow(expense));
   return sheet.getLastRow();
 };
 
 export const deleteExpense = (expense: Expense): boolean => {
-  if (expense.index === undefined) {
+  const expensesSheet = getExpensesSheet(expense.date.getFullYear());
+  if (!expensesSheet || expense.index === undefined) {
     return false;
   }
-  const expensesSheet = getExpensesSheet();
   expensesSheet.deleteRow(expense.index);
   return true;
 };

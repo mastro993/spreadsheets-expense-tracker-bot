@@ -204,7 +204,7 @@ export const showLastExpenses = (chat_id: string) => {
     const text = `🗓️ ${formattedDate}: ${expenseDescription} -> ${amount} €`;
     const callback_data = encodeCallbackData({
       callback: Callback.DELETE,
-      payload: `${index}`,
+      payload: `${date.getFullYear()}_${index}`,
     });
     keyboard.push([{ text, callback_data }]);
   });
