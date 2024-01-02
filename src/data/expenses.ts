@@ -60,9 +60,14 @@ export const getExpense = (
   if (!expensesSheet) {
     return undefined;
   }
+
   const dataRange = expensesSheet.getRange(index + 1, 1, 1, COLUMN_SIZE);
   const values = dataRange.getValues();
-  return values[0] && { ...rowToExpense(values[0]), index };
+  if (!values[0]) {
+    return undefined;
+  }
+
+  return { ...rowToExpense(values[0]), index };
 };
 
 const getAllExpensesForYear = (year: number): Expense[] => {
@@ -70,6 +75,7 @@ const getAllExpensesForYear = (year: number): Expense[] => {
   if (!expensesSheet) {
     return [];
   }
+
   const numRows = expensesSheet.getLastRow() - 1;
   const dataRange = expensesSheet.getRange(2, 1, numRows, COLUMN_SIZE);
   const data = dataRange.getValues();
@@ -86,6 +92,7 @@ export const getAllExpenses = (): Expense[] => {
   do {
     yearExpenses = getAllExpensesForYear(year);
     expenses = expenses.concat(yearExpenses);
+    year = year - 1;
   } while (yearExpenses.length > 0);
   return expenses;
 };
