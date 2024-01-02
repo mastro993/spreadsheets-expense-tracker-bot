@@ -1,7 +1,7 @@
 // DO NOT TOUCH
 // This const is configured during the build phase.
 
-import { SHEET_ID, SHEET_NAME } from "../config/spreadsheet";
+import { SHEET_ID } from "../config/spreadsheet";
 
 const getOrCreateSheet = (sheetName: string) => {
   let sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName(sheetName);
@@ -16,7 +16,7 @@ export const getExpensesSheet = (
   forYear: number,
   createIfNotExist: boolean = false
 ): GoogleAppsScript.Spreadsheet.Sheet | undefined => {
-  const sheetName = SHEET_NAME ?? forYear.toString();
+  const sheetName = forYear.toString();
   let sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName(sheetName);
   if (!sheet && createIfNotExist) {
     var numSheets = SpreadsheetApp.openById(SHEET_ID).getNumSheets();
