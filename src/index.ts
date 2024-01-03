@@ -23,13 +23,6 @@ function doPost(event: GoogleAppsScript.Events.DoPost) {
   }
 }
 
-function doGet(event: GoogleAppsScript.Events.DoGet) {
-  const categories = getAllExpenses();
-  return ContentService.createTextOutput(
-    JSON.stringify(categories)
-  ).setMimeType(ContentService.MimeType.JSON);
-}
-
 function configureTelegramBot() {
   setTelegramWebhook();
 }
