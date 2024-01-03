@@ -30,8 +30,21 @@ export const EXPENSE_CATEGORIES: ExpenseCategory[] = [
     ],
   },
   {
-    name: "Leisure",
-    emoji: "🎱",
+    name: "Travel",
+    emoji: "✈️",
+    children: [
+      "Agencies",
+      "Hotels",
+      "Transportation",
+      "Food & Drinks",
+      "Leisure",
+      "Attractions",
+      "Other",
+    ],
+  },
+  {
+    name: "Entertainment",
+    emoji: "⭐️",
     children: [
       "Books",
       "Drinks",
@@ -45,7 +58,7 @@ export const EXPENSE_CATEGORIES: ExpenseCategory[] = [
   },
   {
     name: "Health",
-    emoji: "🏥",
+    emoji: "💊",
     children: [
       "Self care",
       "Fitness",
@@ -56,7 +69,7 @@ export const EXPENSE_CATEGORIES: ExpenseCategory[] = [
     ],
   },
   {
-    name: "Transportation",
+    name: "Transport",
     emoji: "🚌",
     children: [
       "Fuel",
@@ -83,19 +96,7 @@ export const EXPENSE_CATEGORIES: ExpenseCategory[] = [
       "Other",
     ],
   },
-  {
-    name: "Travel",
-    emoji: "✈️",
-    children: [
-      "Agencies",
-      "Hotels",
-      "Transportation",
-      "Food & Drinks",
-      "Leisure",
-      "Attractions",
-      "Other",
-    ],
-  },
+
   {
     name: "Subscriptions",
     emoji: "🔁",
