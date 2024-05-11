@@ -1,21 +1,30 @@
 import { Telegram } from "../types/Telegram";
-
 import { checkUserAuthentication } from "./core/auth";
-import { handleCallback, handleMessage } from "./telegram/handlers";
+import {
+  handleAppleWallet,
+  handleTelegramCallback,
+  handleTelegramMessage,
+} from "./telegram/handlers";
 import { setTelegramWebhook } from "./services/telegram";
-import { getAllExpenses } from "./data/expenses";
 import { SheetLogger } from "./utils/logger";
 
 function doPost(event: GoogleAppsScript.Events.DoPost) {
   try {
-    const { message, callback_query }: Telegram.Update = JSON.parse(
-      event.postData.contents
-    );
+    const origin = event.parameter["origin"];
 
-    if (callback_query) {
-      handleCallback(callback_query);
-    } else if (message && checkUserAuthentication(message.chat.id, message)) {
-      handleMessage(message);
+    if (origin === "apple-wallet") {
+      const data = JSON.parse(event.postData.contents);
+      handleAppleWallet(data);
+    } else {
+      const { message, callback_query }: Telegram.Update = JSON.parse(
+        event.postData.contents
+      );
+
+      if (callback_query) {
+        handleTelegramCallback(callback_query);
+      } else if (message && checkUserAuthentication(message.chat.id, message)) {
+        handleTelegramMessage(message);
+      }
     }
   } catch (error: any) {
     console.log("doPost", "Error handling request", error);

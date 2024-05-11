@@ -18,10 +18,28 @@ import {
   showTelegramWelcome,
 } from "./misc";
 import { Callback, Command, Response, decodeCallbackData } from "./types";
-import { deleteExpense, getExpense } from "../data/expenses";
+import { deleteExpense, getExpense, saveExpense } from "../data/expenses";
 import { sendTelegramMessage } from "../services/telegram";
 
-export const handleMessage = (message: Telegram.Message) => {
+export const handleAppleWallet = (data: any) => {
+  const amountString = data.amount?.text().replace(",", ".");
+  const amount = parseFloat(amountString ?? 0);
+  const description = `${data.merchant} - ${data.name}`;
+  const date = new Date(data.date);
+
+  if (isNaN(amount)) {
+    return;
+  }
+
+  saveExpense({
+    amount,
+    date,
+    description,
+    notes: `Via Apple Wallet`,
+  });
+};
+
+export const handleTelegramMessage = (message: Telegram.Message) => {
   const { chat, text, reply_to_message } = message;
 
   switch (text) {
@@ -71,7 +89,9 @@ export const handleMessage = (message: Telegram.Message) => {
   }
 };
 
-export const handleCallback = (callbackQuery: Telegram.CallbackQuery) => {
+export const handleTelegramCallback = (
+  callbackQuery: Telegram.CallbackQuery
+) => {
   const chat_id = String(callbackQuery.message.chat.id);
   const message_id = callbackQuery.message.message_id;
 
